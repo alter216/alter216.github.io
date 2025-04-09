@@ -1,6 +1,7 @@
 ---
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
+import { Image } from 'astro:assets';
 import PhotoCaption from './PhotoCaption.astro';
 
 interface Props {
@@ -28,16 +29,23 @@ if (!mdFile || !imageFile) {
 const filePath = path.join(collectionDir, mdFile);
 const fileContents = fs.readFileSync(filePath, 'utf8');
 const firstLine = fileContents.split('\n')[0] || 'Photo';
+
+// Import the image dynamically
+const imagePath = path.join(collectionDir, imageFile);
+const imageModule = await import(/* @vite-ignore */ imagePath + '?url');
 ---
+
 <div class="max-w-4xl mx-auto p-4 text-center">
   <h2 class="text-muted-text dark:text-dark-muted-text mb-3 text-lg font-bold">
     Today's Featured Image
   </h2>
   <div class="relative w-1/2 aspect-[4/3] mb-4 mx-auto">
-    <img
-      src={`/src/content/photos/${collection}/${imageFile}`}
+    <Image
+      src={imageModule.default}
       alt={firstLine}
       class="object-contain w-full h-full"
+      width={800}
+      height={600}
     />
   </div>
   <PhotoCaption collection={collection} mdFile={mdFile} />
