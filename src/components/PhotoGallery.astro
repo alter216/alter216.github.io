@@ -1,7 +1,7 @@
 ---
 import fs from 'node:fs';
 import path from 'node:path';
-import { Image } from 'astro:assets';
+import { getImage } from 'astro:assets';
 import PhotoCaption from './PhotoCaption.astro';
 
 interface Props {
@@ -30,9 +30,26 @@ const filePath = path.join(collectionDir, mdFile);
 const fileContents = fs.readFileSync(filePath, 'utf8');
 const firstLine = fileContents.split('\n')[0] || 'Photo';
 
-// Import the image dynamically
-const imagePath = path.join(collectionDir, imageFile);
-const imageModule = await import(/* @vite-ignore */ imagePath + '?url');
+// Create a public URL for the image
+// This moves the image to the public directory during build
+const publicImagePath = `/photos/${collection}/${imageFile}`;
+
+// Copy the image to the public directory during build
+// This is done at build time, so it's safe
+const publicDir = path.join(process.cwd(), 'public/photos', collection);
+fs.mkdirSync(publicDir, { recursive: true });
+fs.copyFileSync(
+  path.join(collectionDir, imageFile),
+  path.join(publicDir, imageFile)
+);
+
+// Get optimized image using getImage for proper optimization
+const { src, attributes } = await getImage({
+  src: publicImagePath,
+  width: 800,
+  height: 600,
+  format: 'webp', // Convert to webp for better performance
+});
 ---
 
 <div class="max-w-4xl mx-auto p-4 text-center">
@@ -40,12 +57,12 @@ const imageModule = await import(/* @vite-ignore */ imagePath + '?url');
     Today's Featured Image
   </h2>
   <div class="relative w-1/2 aspect-[4/3] mb-4 mx-auto">
-    <Image
-      src={imageModule.default}
+    <img
+      src={src}
       alt={firstLine}
+      width={attributes.width}
+      height={attributes.height}
       class="object-contain w-full h-full"
-      width={800}
-      height={600}
     />
   </div>
   <PhotoCaption collection={collection} mdFile={mdFile} />
