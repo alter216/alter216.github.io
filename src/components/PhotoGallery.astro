@@ -10,45 +10,77 @@ interface Props {
 
 const { collection } = Astro.props;
 
-// Get the photos directory path
-const photosDir = path.join(process.cwd(), 'src/content/photos');
-const collectionDir = path.join(photosDir, collection);
+// Get the photos directory path (everything is now in public)
+const publicDir = path.join(process.cwd(), 'public/photos', collection);
 
-// Read the collection directory
-const files = fs.readdirSync(collectionDir);
+// Ensure public directory exists
+fs.mkdirSync(publicDir, { recursive: true });
 
-// Find the markdown and image files
-const mdFile = files.find(file => file.endsWith('.md'));
-const imageFile = files.find(file => file.endsWith('.png') || file.endsWith('.jpg') || file.endsWith('.jpeg'));
+// Read the public directory for both markdown and images
+let publicFiles: string[] = [];
+try {
+  publicFiles = fs.readdirSync(publicDir);
+} catch (error) {
+  // Directory might not exist yet, but we've just tried to create it
+  throw new Error(`Could not read directory for collection: ${collection}`);
+}
 
-if (!mdFile || !imageFile) {
-  throw new Error(`No photo found in collection: ${collection}`);
+// Find the markdown file
+const mdFile = publicFiles.find(file => file.endsWith('.md'));
+
+if (!mdFile) {
+  throw new Error(`No markdown file found in collection: ${collection}`);
 }
 
 // Read the markdown file for the alt text (first line)
-const filePath = path.join(collectionDir, mdFile);
+const filePath = path.join(publicDir, mdFile);
 const fileContents = fs.readFileSync(filePath, 'utf8');
 const firstLine = fileContents.split('\n')[0] || 'Photo';
 
-// Create a public URL for the image
-// This moves the image to the public directory during build
-const publicImagePath = `/photos/${collection}/${imageFile}`;
-
-// Copy the image to the public directory during build
-// This is done at build time, so it's safe
-const publicDir = path.join(process.cwd(), 'public/photos', collection);
-fs.mkdirSync(publicDir, { recursive: true });
-fs.copyFileSync(
-  path.join(collectionDir, imageFile),
-  path.join(publicDir, imageFile)
+// Find image in public directory
+const imageFile: string | undefined = publicFiles.find(file => 
+  file.endsWith('.png') || file.endsWith('.jpg') || file.endsWith('.jpeg')
 );
 
-// Get optimized image using getImage for proper optimization
-const { src, attributes } = await getImage({
+if (!imageFile) {
+  throw new Error(`No image found in collection: ${collection}`);
+}
+
+// Create path to image in public directory
+const publicImagePath = `/photos/${collection}/${imageFile}`;
+
+// Generate multiple image sizes for responsive loading
+const smallImage = await getImage({
+  src: publicImagePath,
+  width: 400,
+  height: 300,
+  format: 'webp',
+  quality: 80
+});
+
+const mediumImage = await getImage({
   src: publicImagePath,
   width: 800,
-  height: 600,
-  format: 'webp', // Convert to webp for better performance
+  height: 600, 
+  format: 'webp',
+  quality: 80
+});
+
+const largeImage = await getImage({
+  src: publicImagePath,
+  width: 1200,
+  height: 900,
+  format: 'webp',
+  quality: 80
+});
+
+// Create a placeholder for fast loading
+const placeholderImage = await getImage({
+  src: publicImagePath,
+  width: 20,
+  height: 15,
+  format: 'webp',
+  quality: 30
 });
 ---
 
@@ -57,12 +89,23 @@ const { src, attributes } = await getImage({
     Today's Featured Image
   </h2>
   <div class="relative w-1/2 aspect-[4/3] mb-4 mx-auto">
+    <!-- Placeholder image for instant loading -->
+    <div class="absolute inset-0 blur-sm transition-opacity duration-500" 
+         style={`background-image: url(${placeholderImage.src}); background-size: cover; background-position: center;`}>
+    </div>
+    
+    <!-- Responsive image with multiple sizes -->
     <img
-      src={src}
+      src={mediumImage.src}
+      srcset={`${smallImage.src} 400w, ${mediumImage.src} 800w, ${largeImage.src} 1200w`}
+      sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
       alt={firstLine}
-      width={attributes.width}
-      height={attributes.height}
-      class="object-contain w-full h-full"
+      width={mediumImage.attributes.width}
+      height={mediumImage.attributes.height}
+      class="object-contain w-full h-full relative z-10"
+      loading="eager"
+      decoding="async"
+      onload="this.previousElementSibling.style.opacity = 0;"
     />
   </div>
   <PhotoCaption collection={collection} mdFile={mdFile} />

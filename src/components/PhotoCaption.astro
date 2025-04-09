@@ -10,7 +10,7 @@ interface Props {
 const { collection, mdFile } = Astro.props;
 
 // Get the photos directory path
-const photosDir = path.join(process.cwd(), 'src/content/photos');
+const photosDir = path.join(process.cwd(), 'public/photos');
 const collectionDir = path.join(photosDir, collection);
 
 // Read the markdown file
