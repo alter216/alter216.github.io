@@ -1,0 +1,25 @@
+---
+import fs from 'fs';
+import path from 'path';
+
+interface Props {
+  collection: string;
+  mdFile: string;
+}
+
+const { collection, mdFile } = Astro.props;
+
+// Get the photos directory path
+const photosDir = path.join(process.cwd(), 'src/content/photos');
+const collectionDir = path.join(photosDir, collection);
+
+// Read the markdown file
+const filePath = path.join(collectionDir, mdFile);
+const fileContents = fs.readFileSync(filePath, 'utf8');
+---
+
+<div class="prose dark:prose-invert">
+  <slot>
+    {fileContents}
+  </slot>
+</div>

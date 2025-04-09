@@ -1,0 +1,1 @@
+M.C. Escher, Puddle, 1952. Woodcut Print.

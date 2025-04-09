@@ -1,0 +1,44 @@
+---
+import fs from 'fs';
+import path from 'path';
+import PhotoCaption from './PhotoCaption.astro';
+
+interface Props {
+  collection: string;
+}
+
+const { collection } = Astro.props;
+
+// Get the photos directory path
+const photosDir = path.join(process.cwd(), 'src/content/photos');
+const collectionDir = path.join(photosDir, collection);
+
+// Read the collection directory
+const files = fs.readdirSync(collectionDir);
+
+// Find the markdown and image files
+const mdFile = files.find(file => file.endsWith('.md'));
+const imageFile = files.find(file => file.endsWith('.png') || file.endsWith('.jpg') || file.endsWith('.jpeg'));
+
+if (!mdFile || !imageFile) {
+  throw new Error(`No photo found in collection: ${collection}`);
+}
+
+// Read the markdown file for the alt text (first line)
+const filePath = path.join(collectionDir, mdFile);
+const fileContents = fs.readFileSync(filePath, 'utf8');
+const firstLine = fileContents.split('\n')[0] || 'Photo';
+---
+<div class="max-w-4xl mx-auto p-4 text-center">
+  <h2 class="text-muted-text dark:text-dark-muted-text mb-3 text-lg font-bold">
+    Today's Featured Image
+  </h2>
+  <div class="relative w-1/2 aspect-[4/3] mb-4 mx-auto">
+    <img
+      src={`/src/content/photos/${collection}/${imageFile}`}
+      alt={firstLine}
+      class="object-contain w-full h-full"
+    />
+  </div>
+  <PhotoCaption collection={collection} mdFile={mdFile} />
+</div>
