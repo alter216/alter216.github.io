@@ -1,5 +1,5 @@
 ---
-title: Life as Experiment -- The Doomed City by the Brothers Strugatsky
+title: Life as Experiment - The Doomed City by the Brothers Strugatsky
 description: Book thoughts
 publicationDate: 2025-05-28
 image: "./doomed-city.jpg"

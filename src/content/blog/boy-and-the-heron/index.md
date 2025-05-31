@@ -1,5 +1,5 @@
 ---
-title: The Boy and the Heron -- Ghibli-style genAI and how to live
+title: How Do You Live? Thoughts on The Boy and the Heron
 description: Movie thoughts
 publicationDate: 2025-04-09
 image: "./boy-and-the-heron-poster.jpg"
