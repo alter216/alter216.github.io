@@ -45,27 +45,35 @@ const readingTime = entry.body ? calculateReadingTime(entry.body) : 0;
 <BaseLayout>
   <ReadingProgressBar />
   <div>
+  <h1
+    class="text-[36px] leading-snug font-bold text-balance text-black dark:text-white"
+  >
+    {entry.data.title}
+  </h1>
+  <p class="text-muted-text dark:text-dark-muted-text mt-3">
+    {formatDate(entry.data.publicationDate)}
+  </p>
+  <p class="text-blue-500 dark:text-orange-400 mt-1 text-sm">
+    {readingTime} min read
+  </p>
+  
     {
       entry.data.image && (
         <Image
           src={entry.data.image}
           alt={entry.data.imageAlt || ""}
-          class="mb-12 h-auto w-full"
+          class="mb-12 h-auto w-full mt-6"
           draggable="false"
         />
       )
     }
-    <h1
-      class="text-[36px] leading-snug font-bold text-balance text-black dark:text-white"
-    >
-      {entry.data.title}
-    </h1>
-    <p class="text-muted-text dark:text-dark-muted-text mt-3">
-      {formatDate(entry.data.publicationDate)}
-    </p>
-    <p class="text-muted-text dark:text-dark-muted-text mt-1 text-sm">
-      {readingTime} min read
-    </p>
+        {
+          entry.data.imageCaption && (
+            <p class="text-muted-text dark:text-dark-muted-text text-sm italic text-center mt-4 mb-8">
+              {entry.data.imageCaption}
+            </p>
+          )
+        }
     <hr
       class="border-muted-text dark:border-dark-muted-text my-12 border-[0.5px] opacity-10 dark:opacity-15"
     />

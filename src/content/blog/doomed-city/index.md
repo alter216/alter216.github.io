@@ -1,24 +1,25 @@
 ---
-title: Life as Experiment - The Doomed City by the Brothers Strugatsky
+title: Life as Experiment -- The Doomed City by the Brothers Strugatsky
 description: Book thoughts
 publicationDate: 2025-05-28
 image: "./doomed-city.jpg"
 imageAlt: Doomed City by Nicholas Roerich
+imageCaption: "Doomed City by Nicholas Roerich. The title of the Strugatskys' book originated from this painting, which 'astonished [them] with its gloomy beauty and the feeling of hopelessness radiating from it.'"
 ---
 
-The Brothers Strugatsky are the pre-eminent sci-fi authors of Russia. Unlike other literary masters of their era, such as Bulgakov and Grossman, they achieved great publishing success during Soviet times, despite the onerous demands of the government censors. However, their most political novel--_The Doomed City_--was written from 1969-1972 with the belief that it was too dangerous to ever leave the desk drawer.
+The Brothers Strugatsky are the pre-eminent sci-fi authors of Russia. Unlike other literary masters of their era, they achieved great success during Soviet times, despite the onerous demands of the government censors. However, their most political novel--_The Doomed City_--was written from 1969-1972 with the belief that it was too dangerous to ever leave the desk drawer.
 
 The eponymous setting of the novel, known only as the City, is an unearthly place where all inhabitants are governed by an enormous Experiment. The goal of the Experiment is never stated, but it is the grounding principle of everything that happens, no matter how bizarre. Baboons invade, tearing through buildings, attacking people, and shitting in the streets. People disappear and turn up dead a few weeks later, their corpses smashed as if they fell from the sky. The sun goes out for twenty straight days. Whatever happens, whatever it is, it is a part of the Experiment. 
 
 Our protagonist, Andrei, is an astronomer from 1950s Leningrad who is newly arrived in the City, and he believes wholeheartedly that a socialist utopia is imminent--as long as the people have the strength to obey the party leaders. At the novel's outset, he constantly exhorts his friends to carry out their duty without losing faith in the Experiment, from which we understand that his ideological tendencies have been transplanted onto the Experiment.
 
-The City's other inhabitants have been plucked from various countries and times throughout the 20th Century. They range from an American professor of the 60’s to a recently decommissioned officer of the Wehrmacht; from a Chinese peasant of the 50’s to a Russian Soviet Jew. Their only commonality is agreeing to participate in the Experiment, the purpose of which is never explained.
+The City's other inhabitants have been plucked from various countries and times throughout the 20th Century. They range from an American professor of the 60’s to a recently decommissioned officer of the Wehrmacht; from a Chinese peasant of the 50’s to a Russian Soviet Jew. Their sole commonality is agreeing to participate in the Experiment, the purpose of which is never explained.
 
 This narrative structure begs the question of what it means to treat society--and more fundamentally, life itself--as an experiment. 
 
-First of all, Andrei's character and his initial zeal makes it clear that the Strugatskys' viewed life under the Soviet as akin to an experiment. The Soviet leadership set conditions and tasks on their human test subjects, tormenting them for a higher purpose that remained invisible. These human test subjects were transformed into statistics, into numbers; their life had no further purpose and could be discarded at will. It was with this mindset that the Soviet leadership could abandon 3.5 million Leningraders to a Nazi siege for 900 days as nearly half the city perished of starvation.
+First of all, Andrei's character and his initial zeal makes it clear that the Strugatskys concieved of this idea of a society-wide experiment based on life under the Soviet. The party leadership set conditions and tasks on their human test subjects, tormenting them for a higher purpose that remained invisible. These human test subjects were transformed into statistics, into numbers; their life had no further purpose and could be discarded at will. It was with this mindset that the Soviet leadership could abandon 3.5 million Leningraders to a Nazi siege for 900 days as nearly half the city perished of starvation.
 
-But the Experiment represents a more general idea than a single regime, a single country. It  gives a form to the utter subjugation and destruction of individual will under totalitarian power. It describes existence without guarantee of lasting safety and stability, and no room for comfort or dreams. In this situation, there is no point in planning for the future because everything can be taken away in the blink of an eye. 
+But the Experiment represents a more general idea than a single regime, a single country. It gives a form to the utter subjugation and destruction of individual will under totalitarian power. It describes existence without guarantee of lasting safety and stability, and no room for comfort or dreams. In this situation, there is no point in planning for the future because everything can be taken away in the blink of an eye. 
 
 Without safety, without purpose, without hope, a human is made to feel like an animal. The Experiment is an experience of the world in which absurdity and suffering reach an incomprehensible level-–one that is fundamentally incompatible with the belief that human life has intrinsic value.
 
