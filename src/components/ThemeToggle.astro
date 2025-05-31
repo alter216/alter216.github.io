@@ -82,7 +82,7 @@
 
 <script data-astro-rerun is:inline>
   (function () {
-    const theme = localStorage.getItem("currentTheme") || "system";
+    const theme = localStorage.getItem("currentTheme") || "dark";
     const prefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)",
     ).matches;
@@ -103,7 +103,7 @@
   type Theme = "light" | "dark" | "system" | null;
 
   function getCurrentTheme(): Theme {
-    return (localStorage.getItem("currentTheme") ?? "system") as Theme;
+    return (localStorage.getItem("currentTheme") ?? "dark") as Theme;
   }
 
   function updateTheme(theme: Theme): void {
